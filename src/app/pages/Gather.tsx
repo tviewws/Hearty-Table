@@ -232,7 +232,7 @@ function Gallery() {
 export function Gather() {
   return (
     <PageTransition>
-    <div className="min-h-screen" style={{ backgroundColor: '#F2EFE9' }}>
+    <div className="min-h-screen" style={{ backgroundColor: '#2C2B29' }}>
 
       {/* ── HERO — split screen ── */}
       <section
