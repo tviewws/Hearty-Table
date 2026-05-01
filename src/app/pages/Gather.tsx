@@ -2,30 +2,17 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { useState, useEffect, useRef } from "react";
 import { PageTransition } from "../components/PageTransition";
 
-// Import Gallery Images
-import hearty1 from "../../../assets/hearty1.jpg";
-import hearty2 from "../../../assets/hearty2.jpg";
-import hearty3 from "../../../assets/hearty3.jpg";
-import hearty4 from "../../../assets/hearty4.jpg";
-import hearty5 from "../../../assets/hearty5.jpg";
-import hearty6 from "../../../assets/hearty6.jpg";
-import hearty8 from "../../../assets/hearty8.jpg";
-import hearty9 from "../../../assets/hearty9.jpg";
-import hearty10 from "../../../assets/hearty10.jpg";
-import hearty12 from "../../../assets/hearty12.jpg";
-import hearty13 from "../../../assets/hearty13.jpg";
-
 const GALLERY_IMAGES = [
-  { src: hearty1, caption: "Exquisite Dining — A Study in Precision" },
-  { src: hearty3, caption: "Culinary Art — Rooted in Tradition" },
-  { src: hearty4, caption: "The Craft — Moments of Intention" },
-  { src: hearty5, caption: "Elevated Flavors — Reimagined" },
-  { src: hearty6, caption: "Refined Textures — From the Land" },
-  { src: hearty8, caption: "The Atmosphere — Warmth and Grace" },
-  { src: hearty9, caption: "Curated Details — A Story Told in Courses" },
-  { src: hearty10, caption: "The Evening Glow — Nairobi Nights" },
-  { src: hearty12, caption: "Restrained Luxury — Minimalist Expression" },
-  { src: hearty13, caption: "The Final Note — A Shared Memory" },
+  { src: "/assets/hearty1.jpg", caption: "Exquisite Dining — A Study in Precision" },
+  { src: "/assets/hearty3.jpg", caption: "Culinary Art — Rooted in Tradition" },
+  { src: "/assets/hearty4.jpg", caption: "The Craft — Moments of Intention" },
+  { src: "/assets/hearty5.jpg", caption: "Elevated Flavors — Reimagined" },
+  { src: "/assets/hearty6.jpg", caption: "Refined Textures — From the Land" },
+  { src: "/assets/hearty8.jpg", caption: "The Atmosphere — Warmth and Grace" },
+  { src: "/assets/hearty9.jpg", caption: "Curated Details — A Story Told in Courses" },
+  { src: "/assets/hearty10.jpg", caption: "The Evening Glow — Nairobi Nights" },
+  { src: "/assets/hearty12.jpg", caption: "Restrained Luxury — Minimalist Expression" },
+  { src: "/assets/hearty13.jpg", caption: "The Final Note — A Shared Memory" },
 ];
 
 function Gallery() {
@@ -222,7 +209,7 @@ export function Gather() {
         {/* Left Side: Image (Always 50%) */}
         <div className="w-1/2 h-full relative overflow-hidden">
           <ImageWithFallback
-            src={hearty2}
+            src="/assets/hearty2.jpg"
             alt="Gather dinner"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.55)' }}

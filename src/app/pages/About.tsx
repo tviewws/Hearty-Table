@@ -1,7 +1,7 @@
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { PageTransition } from "../components/PageTransition";
 
-import hearty11 from "../../../assets/hearty11.jpg";
+// The hearty11 import has been removed to allow the public folder to work correctly.
 
 export function About() {
   return (
@@ -90,7 +90,7 @@ export function About() {
           ].map((stat, i) => (
             <div
               key={i}
-              className="text-center py-12 md:py-16 px-6 md:px-8"
+              className={`text-center py-12 md:py-16 px-6 md:px-8 stat-item-${i}`}
               style={{ borderBottom: i < 2 ? '1px solid #2E2E2C' : 'none' }}
             >
               <style>{`@media (min-width: 768px) {
@@ -121,7 +121,7 @@ export function About() {
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[5fr_4fr] gap-8 md:gap-24 items-center">
           <div style={{ position: 'relative' }}>
             <img
-              src={hearty11}
+              src="/assets/hearty11.jpg"
               alt="Hearty Table - Precision and Intention"
               className="w-full object-cover"
               style={{ height: '620px' }}

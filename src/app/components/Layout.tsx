@@ -2,9 +2,6 @@ import { Outlet, Link, useLocation } from "react-router";
 import { ScrollToTop } from "./ScrollToTop";
 import { AnimatePresence } from "motion/react";
 
-// 1. Import the logo from your root assets folder
-import logoImg from "../../../assets/Logo.png";
-
 export function Layout() {
   const location = useLocation();
 
@@ -40,9 +37,9 @@ export function Layout() {
           </div>
 
           <Link to="/" className="flex-shrink-0 md:mx-0 mx-auto">
-            {/* 2. Updated Header Logo to use the imported variable */}
+            {/* Updated Header Logo to use direct static path */}
             <img
-              src={logoImg}
+              src="/assets/Logo.png"
               alt="Hearty Table"
               className="h-10 md:h-12 w-auto"
             />
@@ -97,9 +94,9 @@ export function Layout() {
       <footer className="py-20 text-center" style={{ backgroundColor: '#2C2B29' }}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <Link to="/">
-            {/* 3. Updated Footer Logo to use the imported variable */}
+            {/* Updated Footer Logo to use direct static path */}
             <img
-              src={logoImg}
+              src="/assets/Logo.png"
               alt="Hearty Table"
               className="h-10 w-auto mx-auto mb-8"
             />

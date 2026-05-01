@@ -2,7 +2,7 @@ import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 import { Link } from "react-router";
 import { PageTransition } from "../components/PageTransition";
 
-import hearty7 from "../../../assets/hearty8.jpg";
+// The import hearty7 line has been removed to allow the public folder to work correctly.
 
 export function Home() {
   return (
@@ -66,7 +66,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
           <div className="relative">
             <img
-              src={hearty7}
+              src="/assets/hearty8.jpg"
               alt="Hearty Table - Rooted, Refined, Intentional"
               className="w-full object-cover"
               style={{ height: '600px' }}
