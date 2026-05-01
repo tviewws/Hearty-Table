@@ -39,7 +39,7 @@ export function Layout() {
           <Link to="/" className="flex-shrink-0 md:mx-0 mx-auto">
             {/* Updated Header Logo to use direct static path */}
             <img
-              src="/assets/Logo.png"
+              src="/assets/logo.png"
               alt="Hearty Table"
               className="h-10 md:h-12 w-auto"
             />
@@ -96,7 +96,7 @@ export function Layout() {
           <Link to="/">
             {/* Updated Footer Logo to use direct static path */}
             <img
-              src="/assets/Logo.png"
+              src="/assets/logo.png"
               alt="Hearty Table"
               className="h-10 w-auto mx-auto mb-8"
             />
