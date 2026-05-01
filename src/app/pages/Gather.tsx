@@ -48,12 +48,11 @@ function Gallery() {
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setCurrent(c => {
-        const nxt = (c + 1) % GALLERY_IMAGES.length;
-        setTransitioning(true);
-        setTimeout(() => setTransitioning(false), 600);
-        return nxt;
-      });
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrent(c => (c + 1) % GALLERY_IMAGES.length);
+        setTransitioning(false);
+      }, 600);
     }, 5000);
   };
 
@@ -67,7 +66,6 @@ function Gallery() {
 
   return (
     <section style={{ backgroundColor: '#1E1E1C' }}>
-
       {/* heading */}
       <div className="text-center" style={{ paddingTop: '5rem', paddingBottom: '3.5rem' }}>
         <p style={{
@@ -99,19 +97,18 @@ function Gallery() {
           position: 'relative',
           overflow: 'hidden',
         }}>
-          {/* image fade */}
           <div style={{
             position: 'absolute', inset: 0,
             opacity: transitioning ? 0 : 1,
             transition: 'opacity 0.6s ease',
           }}>
             <ImageWithFallback
+              key={current}
               src={GALLERY_IMAGES[current].src}
               alt={GALLERY_IMAGES[current].caption}
               className="w-full h-full object-cover"
               style={{ filter: 'brightness(0.72)' }}
             />
-            {/* bottom gradient */}
             <div style={{
               position: 'absolute', bottom: 0, left: 0, right: 0,
               height: '45%',
@@ -119,7 +116,6 @@ function Gallery() {
             }} />
           </div>
 
-          {/* caption */}
           <div style={{
             position: 'absolute', bottom: '2.5rem', left: '3rem',
             opacity: transitioning ? 0 : 1,
@@ -136,7 +132,6 @@ function Gallery() {
             </p>
           </div>
 
-          {/* counter */}
           <div style={{ position: 'absolute', bottom: '2.5rem', right: '3rem' }}>
             <p style={{
               fontFamily: 'var(--font-serif)',
@@ -149,7 +144,6 @@ function Gallery() {
           </div>
         </div>
 
-        {/* arrow — prev */}
         <button
           onClick={handlePrev}
           aria-label="Previous slide"
@@ -157,11 +151,9 @@ function Gallery() {
             position: 'absolute', top: '50%', left: '2rem',
             transform: 'translateY(-50%)',
             background: 'none', border: '1px solid rgba(255,255,255,0.12)',
-            cursor: 'pointer',
-            width: '44px', height: '44px',
+            cursor: 'pointer', width: '44px', height: '44px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
+            outline: 'none', transition: 'border-color 0.3s ease',
           }}
           onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)')}
           onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
@@ -172,7 +164,6 @@ function Gallery() {
           </svg>
         </button>
 
-        {/* arrow — next */}
         <button
           onClick={handleNext}
           aria-label="Next slide"
@@ -180,11 +171,9 @@ function Gallery() {
             position: 'absolute', top: '50%', right: '2rem',
             transform: 'translateY(-50%)',
             background: 'none', border: '1px solid rgba(255,255,255,0.12)',
-            cursor: 'pointer',
-            width: '44px', height: '44px',
+            cursor: 'pointer', width: '44px', height: '44px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            outline: 'none',
-            transition: 'border-color 0.3s ease',
+            outline: 'none', transition: 'border-color 0.3s ease',
           }}
           onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)')}
           onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')}
@@ -196,24 +185,16 @@ function Gallery() {
         </button>
       </div>
 
-      {/* dot-dash indicators */}
       <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0.75rem',
-        paddingTop: '2.5rem',
-        paddingBottom: '5rem',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        gap: '0.75rem', paddingTop: '2.5rem', paddingBottom: '5rem',
       }}>
         {GALLERY_IMAGES.map((_, i) => (
           <button
             key={i}
             onClick={() => { resetTimer(); goTo(i); }}
             aria-label={`Go to slide ${i + 1}`}
-            style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              padding: '6px 0',
-            }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px 0' }}
           >
             <span style={{
               display: 'block',
@@ -234,46 +215,48 @@ export function Gather() {
     <PageTransition>
     <div className="min-h-screen" style={{ backgroundColor: '#2C2B29' }}>
 
-      {/* ── HERO — split screen ── */}
+      {/* HERO SECTION - Updated to force side-by-side flex-row on all screen sizes */}
       <section
-        className="relative w-full overflow-hidden -mt-24"
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: '100vh' }}
+        className="relative w-full overflow-hidden -mt-24 flex flex-row h-screen"
       >
-        {/* left: image */}
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Left Side: Image (Always 50%) */}
+        <div className="w-1/2 h-full relative overflow-hidden">
           <ImageWithFallback
             src={hearty2}
             alt="Gather dinner"
             className="w-full h-full object-cover"
             style={{ filter: 'brightness(0.55)' }}
+            loading="eager"
           />
           <p style={{
             position: 'absolute', bottom: '2.5rem', left: '2.5rem',
             fontFamily: 'var(--font-serif)',
-            fontSize: '0.58rem', letterSpacing: '0.25em',
+            fontSize: 'clamp(0.45rem, 1vw, 0.58rem)', letterSpacing: '0.25em',
             color: 'rgba(255,255,255,0.38)', textTransform: 'uppercase',
           }}>
             Nairobi · Kenya
           </p>
         </div>
 
-        {/* right: dark panel */}
+        {/* Right Side: Content Panel (Always 50%) */}
         <div style={{
           backgroundColor: '#1E1E1C',
+          width: '50%',
+          height: '100%',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center',
-          padding: '4rem', position: 'relative',
+          padding: 'clamp(1rem, 5vw, 4rem)', position: 'relative',
         }}>
           <p style={{
             fontFamily: 'var(--font-serif)',
-            letterSpacing: '0.35em', fontSize: '0.58rem',
+            letterSpacing: '0.35em', fontSize: 'clamp(0.45rem, 1vw, 0.58rem)',
             color: '#6B6760', textTransform: 'uppercase', marginBottom: '2.5rem',
           }}>
             The Experience
           </p>
           <h1 style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(5rem, 10vw, 9rem)',
+            fontSize: 'clamp(2rem, 8vw, 9rem)',
             letterSpacing: '0.2em', color: 'white',
             fontWeight: 300, lineHeight: 1, textAlign: 'center', marginBottom: '2.5rem',
           }}>
@@ -282,21 +265,18 @@ export function Gather() {
           <div style={{ width: '40px', height: '1px', backgroundColor: '#3E3E3C', marginBottom: '2.5rem' }} />
           <p style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(0.85rem, 1.5vw, 1.1rem)',
+            fontSize: 'clamp(0.65rem, 1.5vw, 1.1rem)',
             fontStyle: 'italic', color: '#9B9890',
             fontWeight: 300, textAlign: 'center', letterSpacing: '0.04em',
           }}>
-            A curated dinner. A shared story.
+            A curated dinner. <br className="md:hidden" /> A shared story.
           </p>
         </div>
       </section>
 
-      {/* ── OPENING TEXT — two columns ── */}
+      {/* OPENING TEXT */}
       <section className="py-32 px-12" style={{ borderBottom: '1px solid #C8C4Be' }}>
-        <div className="max-w-6xl mx-auto" style={{
-          display: 'grid', gridTemplateColumns: '1fr 1fr',
-          gap: '6rem', alignItems: 'start',
-        }}>
+        <div className="max-w-6xl mx-auto flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-24 items-start">
           <div>
             <p style={{
               fontFamily: 'var(--font-serif)',
@@ -333,11 +313,9 @@ export function Gather() {
         </div>
       </section>
 
-      {/* ── STATS STRIP ── */}
+      {/* STATS STRIP */}
       <section style={{ backgroundColor: '#1E1E1C', borderBottom: '1px solid #2A2A28' }}>
-        <div className="max-w-5xl mx-auto px-12" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-        }}>
+        <div className="max-w-5xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3">
           {[
             { figure: 'Multi-Course', label: 'Format' },
             { figure: 'Intimate', label: 'Atmosphere' },
@@ -345,6 +323,7 @@ export function Gather() {
           ].map((item, i) => (
             <div key={i} className="text-center py-14 px-8" style={{
               borderRight: i < 2 ? '1px solid #2A2A28' : 'none',
+              borderBottom: i < 2 ? '1px solid #2A2A28' : 'none', 
             }}>
               <p style={{
                 fontFamily: 'var(--font-serif)',
@@ -366,7 +345,7 @@ export function Gather() {
         </div>
       </section>
 
-      {/* ── PULL QUOTE ── */}
+      {/* PULL QUOTE */}
       <section className="py-28 px-12" style={{ borderBottom: '1px solid #C8C4Be' }}>
         <div className="max-w-3xl mx-auto text-center">
           <div style={{
@@ -389,12 +368,9 @@ export function Gather() {
         </div>
       </section>
 
-      {/* ── THE EVENING IN DETAIL ── */}
+      {/* THE EVENING IN DETAIL */}
       <section className="py-32 px-12">
-        <div className="max-w-6xl mx-auto" style={{
-          display: 'grid', gridTemplateColumns: '1fr 2fr',
-          gap: '6rem', alignItems: 'start',
-        }}>
+        <div className="max-w-6xl mx-auto flex flex-col md:grid md:grid-cols-[1fr_2fr] gap-12 md:gap-24 items-start">
           <div style={{ position: 'sticky', top: '8rem' }}>
             <p style={{
               fontFamily: 'var(--font-serif)',
@@ -460,10 +436,10 @@ export function Gather() {
         </div>
       </section>
 
-      {/* ── GALLERY ── */}
+      {/* GALLERY */}
       <Gallery />
 
-      {/* ── FOOTER STRIP ── */}
+      {/* FOOTER STRIP */}
       <div style={{ borderTop: '1px solid #C8C4Be' }}>
         <p className="text-center py-10" style={{
           fontFamily: 'var(--font-serif)',
